@@ -8,12 +8,10 @@ Use objects together with entities to implement use-cases like track thumbnails,
 
 ## Before you begin
 
-1. Install the required dependencies. Navigate to `modules`, the run the following commands:
+1. Use `pip` to install the Lattice SDK for Python:
 
     ```bash
-    $ pipenv install
-    $ pipenv shell
-    $ poetry install
+    $ pip install anduril
     ```
 
 1. Get the following authorization tokens from the [Lattice Sandboxes dashboard](/sandboxes.developer.anduril.com):
