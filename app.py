@@ -1,5 +1,5 @@
-from object_store_client import upload_object, download_object, delete_object, list_objects
-from entity_manager_client import override_entity
+from objects import upload_object, download_object, delete_object, list_objects
+from entities import override_entity
 
 from modules.src.anduril import anduril
 
