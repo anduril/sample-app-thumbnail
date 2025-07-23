@@ -1,10 +1,12 @@
-# Lattice SDK: Track Thumbnail
+# Lattice SDK: Track thumbnail
 
 This app demonstrates the Lattice SDK Object Store API.
 
 In Lattice, an *object* is a data model that lets you store and access files across your environment.
 The Object Store API is a content-delivery network service that provides resilient data storage at the edge.
 Use objects together with entities to implement use-cases like track thumbnails, and vessle manifests.
+
+![Image showing the Lattice UI with a track thumbnail displayed](./assets/lattice-ui-track-panel-n113pf-thumbnail.png)
 
 ## Before you begin
 
