@@ -8,6 +8,10 @@ Use objects together with entities to implement use-cases like track thumbnails,
 
 ![Image showing the Lattice UI with a track thumbnail displayed](./assets/lattice-ui-track-panel-n113pf-thumbnail.png)
 
+For more information about the Objects API, see the following:
+- [Objects API](https://developer.anduril.com/reference/rest/objects) in the *Lattice API Reference*.
+- [Objects overview](https://developer.anduril.com/guides/objects/overview) in the *Lattice Developer Guide*.
+
 ## Before you begin
 
 1. Use `pip` to install the Lattice SDK for Python:
@@ -62,4 +66,4 @@ $ python app.py [-h] --operation OPERATION \
     $ python app.py --operation delete --path test-1.tracks.N113PF.jpeg --entity adsbEntity
     ```
 
-For more information, see [the Lattice SDK documentation](https://docs.anduril.com) website.
+For more information, see [the Lattice SDK documentation](https://developer.anduril.com) website.
