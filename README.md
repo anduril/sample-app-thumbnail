@@ -52,18 +52,18 @@ $ python app.py [-h] --operation OPERATION \
 1. To upload an object to Lattice and associate it with an entity, run the following:
 
     ```bash
-    $ python app.py --operation upload --file ./images/N113PF.jpeg --entity adsbEntity
+    $ python app.py --operation upload --file ./path/to/file --entity <entityId>
     ```
 
 1. To download an existing object from Lattice, run the following:
 
     ```bash
-    $ python app.py --operation download --path test-1.tracks.N113PF.jpeg 
+    $ python app.py --operation download --path path/to/object
     ```
 1. To delete an existing object from Lattice, run the following:
 
     ```bash
-    $ python app.py --operation delete --path test-1.tracks.N113PF.jpeg --entity adsbEntity
+    $ python app.py --operation delete --path path/to/object --entity <entityId>
     ```
 
 For more information, see [the Lattice SDK documentation](https://developer.anduril.com) website.
