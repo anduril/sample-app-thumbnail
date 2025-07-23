@@ -17,7 +17,7 @@ For more information about the Objects API, see the following:
 1. Use `pip` to install the Lattice SDK for Python:
 
     ```bash
-    $ pip install anduril
+    $ pip install anduril-lattice-sdk
     ```
 
 1. Get the following authorization tokens from the [Lattice Sandboxes dashboard](/sandboxes.developer.anduril.com):
@@ -28,7 +28,7 @@ For more information about the Objects API, see the following:
 
 1. Get your environment URL from the environment details page in Sandboxes.
 
-1. Set yous sytem environment variables:
+1. Set your system environment variables:
 
     ```bash 
     $ export LATTICE_ENDPOINT=lattice-your_env_id.env.sandboxes.developer.anduril.com
@@ -36,9 +36,12 @@ For more information about the Objects API, see the following:
     $ export SANDBOXES_TOKEN=YOUR_LATTICE_SANDBOXES_TOKEN
     ```
 
+For more information about setting up your environment, see [Set up](https://developer.anduril.com/guides/getting-started/set-up)
+in the *Lattice Developer Guide*.
+
 ## Usage
 
-You can run the app to upload and download objects from the COP using the following command line arguments:
+Use this example app to upload and download binary data to, and from, Lattice:
 
 ```bash
 $ python app.py [-h] --operation OPERATION \
@@ -49,21 +52,21 @@ $ python app.py [-h] --operation OPERATION \
 
 ### Example
 
-1. To upload an object to Lattice and associate it with an entity, run the following:
+1. To upload an object to Lattice and associate it with an entity, use the following:
 
     ```bash
     $ python app.py --operation upload --file ./path/to/file --entity <entityId>
     ```
 
-1. To download an existing object from Lattice, run the following:
+1. To download an existing object from Lattice, use the following:
 
     ```bash
     $ python app.py --operation download --path path/to/object
     ```
-1. To delete an existing object from Lattice, run the following:
+1. To delete an existing object from Lattice, use the following:
 
     ```bash
     $ python app.py --operation delete --path path/to/object --entity <entityId>
     ```
 
-For more information, see [the Lattice SDK documentation](https://developer.anduril.com) website.
+For more information, see the [Lattice SDK documentation](https://developer.anduril.com) website.
