@@ -1,37 +1,22 @@
-from object_store_client import upload_object, download_object, delete_object, list_objects
-from entity_manager_client import override_entity
-
-from modules.src.anduril import anduril
-
+from anduril-lattice-sdk import Lattice
+from objects import upload_object, download_object, delete_object, list_objects
+from entities import override_entity
 import os, sys, asyncio, logging, argparse
 
-logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
-
-
-# Get your Lattice URL and environment bearer token from your environment variables.
 lattice_endpoint = os.getenv('LATTICE_ENDPOINT')
 environment_token = os.getenv('ENVIRONMENT_TOKEN')
-
-# Get the sandboxes token from your environment variables.
-# The following only applies to environments created in Lattice Sandboxes.
-# Remove if you are developing on a different deployment of Lattice.
+# Remove sandboxes_token from the following statements if you are not developing on Sandboxes.
 sandboxes_token = os.getenv('SANDBOXES_TOKEN')
-
-if not environment_token or not lattice_endpoint:
-    logging.warning("Make sure your Lattice URL and bearer token have been set as system environment variables.")
+if not environment_token or not lattice_endpoint or not sandboxes_token:
+    logging.warning("Missing environment variables.")
     sys.exit(1)
 
-# The following only applies to environments created in Lattice Sandboxes.
-# Remove, if you are developing on a different deployment of Lattice.
-if not sandboxes_token:
-    logging.warning("Make sure your sandboxes token has been set as system environment variables.")
-    sys.exit(1)
 def save_object(data, object_path):
     file_name = os.path.basename(object_path)
     with open(file_name, 'wb') as file:
         file.write(data)
 
-client = anduril(
+client = Lattice(
     base_url=f"https://{lattice_endpoint}/api/v1",
     token=environment_token,
     headers={ "Anduril-Sandbox-Authorization": f"Bearer {sandboxes_token}" }
@@ -77,7 +62,7 @@ async def main(args):
         logging.error(f"Exception: {error}")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Object Store API")
+    parser = argparse.ArgumentParser(description="Track Thumbnails Sample App")
 
     parser.add_argument('--operation', type=str, required=True,
                         help='The API service operation you want to execute. \

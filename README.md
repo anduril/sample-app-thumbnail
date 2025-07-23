@@ -1,17 +1,23 @@
-# Lattice SDK: Track Thumbnail
+# Lattice SDK: Track thumbnail
 
 This app demonstrates the Lattice SDK Object Store API.
 
 In Lattice, an *object* is a data model that lets you store and access files across your environment.
-The Object Store API is a content-delivery network service that provides resilient data storage at the edge.
+The Objects API is a content-delivery network service that provides resilient data storage at the edge.
 Use objects together with entities to implement use-cases like track thumbnails, and vessle manifests.
+
+![Image showing the Lattice UI with a track thumbnail displayed](./assets/lattice-ui-track-panel-n113pf-thumbnail.png)
+
+For more information about the Objects API, see the following:
+- [Objects API](https://developer.anduril.com/reference/rest/objects) in the *Lattice API Reference*.
+- [Objects overview](https://developer.anduril.com/guides/objects/overview) in the *Lattice Developer Guide*.
 
 ## Before you begin
 
 1. Use `pip` to install the Lattice SDK for Python:
 
     ```bash
-    $ pip install anduril
+    $ pip install anduril-lattice-sdk
     ```
 
 1. Get the following authorization tokens from the [Lattice Sandboxes dashboard](/sandboxes.developer.anduril.com):
@@ -22,7 +28,7 @@ Use objects together with entities to implement use-cases like track thumbnails,
 
 1. Get your environment URL from the environment details page in Sandboxes.
 
-1. Set yous sytem environment variables:
+1. Set your system environment variables:
 
     ```bash 
     $ export LATTICE_ENDPOINT=lattice-your_env_id.env.sandboxes.developer.anduril.com
@@ -30,9 +36,12 @@ Use objects together with entities to implement use-cases like track thumbnails,
     $ export SANDBOXES_TOKEN=YOUR_LATTICE_SANDBOXES_TOKEN
     ```
 
+For more information about setting up your environment, see [Set up](https://developer.anduril.com/guides/getting-started/set-up)
+in the *Lattice Developer Guide*.
+
 ## Usage
 
-You can run the app to upload and download objects from the COP using the following command line arguments:
+Use this example app to upload and download binary data to, and from, Lattice:
 
 ```bash
 $ python app.py [-h] --operation OPERATION \
@@ -43,21 +52,21 @@ $ python app.py [-h] --operation OPERATION \
 
 ### Example
 
-1. To upload an object to Lattice and associate it with an entity, run the following:
+1. To upload an object to Lattice and associate it with an entity, use the following:
 
     ```bash
-    $ python app.py --operation upload --file ./images/N113PF.jpeg --entity adsbEntity
+    $ python app.py --operation upload --file ./path/to/file --entity <entityId>
     ```
 
-1. To download an existing object from Lattice, run the following:
+1. To download an existing object from Lattice, use the following:
 
     ```bash
-    $ python app.py --operation download --path test-1.tracks.N113PF.jpeg 
+    $ python app.py --operation download --path path/to/object
     ```
-1. To delete an existing object from Lattice, run the following:
+1. To delete an existing object from Lattice, use the following:
 
     ```bash
-    $ python app.py --operation delete --path test-1.tracks.N113PF.jpeg --entity adsbEntity
+    $ python app.py --operation delete --path path/to/object --entity <entityId>
     ```
 
-For more information, see [the Lattice SDK documentation](https://docs.anduril.com) website.
+For more information, see the [Lattice SDK documentation](https://developer.anduril.com) website.
