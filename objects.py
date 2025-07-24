@@ -1,12 +1,14 @@
-import logging
+import logging, os
 
-async def upload_object(file_path, file_name, entity_id, client):
+async def upload_object(file_path, client):
     try:
-        # Define a unique path across your environment for the file.
-        object_path = f"{entity_id}.{file_name}"
-
+        # Get the file name.
+        file_name = os.path.basename(file_path)
+        # Define a unique path for the object using the file name.
+        object_path = f"{file_name}"
         # Open the file in binary mode.
         with open(f"{file_path}", "rb") as file:
+            print(file)
             response = client.objects.upload_object(
                 object_path=object_path,
                 request=file
