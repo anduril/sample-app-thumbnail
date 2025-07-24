@@ -18,7 +18,7 @@ def save_object(data, object_path):
         file.write(data)
 
 client = Lattice(
-    base_url=f"https://{lattice_endpoint}/api/v1",
+    base_url=f"https://{lattice_endpoint}",
     token=environment_token,
     headers={ "Anduril-Sandbox-Authorization": f"Bearer {sandboxes_token}" }
 )
@@ -32,12 +32,14 @@ async def main(args):
 
         match operation:
             case "upload":
-                # Get the name of the file. This is used, along with your integration name,
-                # to define a unique object path in Lattice for the image.
-                file_name = os.path.basename(file_path)
-                upload_response = await upload_object(file_path, file_name, entity_id, client)
-                object_path = f"/api/v1/objects/{upload_response.content_identifier.path}"
-                logging.info(f"Object path: {object_path}")
+                # Get the name of the file.
+                upload_response = await upload_object(file_path, client)
+                if (upload_response):
+                    object_path = f"/api/v1/objects/{upload_response.content_identifier.path}"
+                    logging.info(f"Object path: {object_path}")
+                else:
+                    logging.error("Failed to upload object.")
+                    sys.exit(1)
 
                 await override_entity(operation, object_path, entity_id, client)
 

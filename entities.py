@@ -17,7 +17,7 @@ async def override_entity(operation, object_path, entity_id, client):
                 media=[
                     MediaItem(
                         relative_path=object_path,
-                        type="MEDIA_TYPE_THUMBNAIL"
+                        type="MEDIA_TYPE_IMAGE"
                     )
                 ]
             )
