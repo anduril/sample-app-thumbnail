@@ -14,10 +14,11 @@ For more information about the Objects API, see the following:
 
 ## Before you begin
 
-1. Use `pip` to install the Lattice SDK for Python:
+1. Clone the repository.
+1. Install the dependencies:
 
     ```bash
-    $ pip install anduril-lattice-sdk
+    $ pip install -r requirements.txt
     ```
 
 1. Get the following authorization tokens from the [Lattice Sandboxes dashboard](/sandboxes.developer.anduril.com):
