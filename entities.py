@@ -1,4 +1,4 @@
-from anduril-lattice-sdk import Media, MediaItem, Entity, Provenance, Provenance
+from anduril import Media, MediaItem, Entity, Provenance, Provenance
 from datetime import datetime, timezone
 import logging
 
