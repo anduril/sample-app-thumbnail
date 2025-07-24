@@ -1,4 +1,5 @@
-from anduril-lattice-sdk import Lattice
+from anduril import Lattice
+
 from objects import upload_object, download_object, delete_object, list_objects
 from entities import override_entity
 import os, sys, asyncio, logging, argparse
@@ -34,9 +35,7 @@ async def main(args):
                 # Get the name of the file. This is used, along with your integration name,
                 # to define a unique object path in Lattice for the image.
                 file_name = os.path.basename(file_path)
-
                 upload_response = await upload_object(file_path, file_name, entity_id, client)
-
                 object_path = f"/api/v1/objects/{upload_response.content_identifier.path}"
                 logging.info(f"Object path: {object_path}")
 
