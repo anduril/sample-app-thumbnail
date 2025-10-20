@@ -21,7 +21,7 @@ For more information about the Objects API, see the following:
     $ pip install -r requirements.txt
     ```
 
-1. Get the following authorization tokens from the [Lattice Sandboxes dashboard](/sandboxes.developer.anduril.com):
+1. Get the following authorization tokens from the [Lattice Sandboxes dashboard](https://sandboxes.developer.anduril.com). For information on how to obtain these tokens, see the [Sandboxes documentation](https://developer.anduril.com/guides/getting-started/sandboxes#get-the-tokens):
     - ```authorization``` -- This is your **environment bearer token**, which you can get by choosing your environment
         from the [dashboard list](https://sandboxes.developer.anduril.com/idee/environments).
     - ```anduril-sandbox-authorization``` -- This is your **sandboxes bearer token**, which you can obtain from the
