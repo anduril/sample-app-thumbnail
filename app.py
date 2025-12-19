@@ -5,10 +5,11 @@ from entities import override_entity
 import os, sys, asyncio, logging, argparse
 
 lattice_endpoint = os.getenv('LATTICE_ENDPOINT')
-environment_token = os.getenv('ENVIRONMENT_TOKEN')
+client_id = os.getenv('LATTICE_CLIENT_ID')
+client_secret = os.getenv('LATTICE_CLIENT_SECRET')
 # Remove sandboxes_token from the following statements if you are not developing on Sandboxes.
 sandboxes_token = os.getenv('SANDBOXES_TOKEN')
-if not environment_token or not lattice_endpoint or not sandboxes_token:
+if not client_id or not client_secret or not lattice_endpoint or not sandboxes_token:
     logging.warning("Missing environment variables.")
     sys.exit(1)
 
@@ -19,7 +20,8 @@ def save_object(data, object_path):
 
 client = Lattice(
     base_url=f"https://{lattice_endpoint}",
-    token=environment_token,
+    client_id=client_id,
+    client_secret=client_secret,
     headers={ "Anduril-Sandbox-Authorization": f"Bearer {sandboxes_token}" }
 )
 async def main(args):
