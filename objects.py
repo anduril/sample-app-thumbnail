@@ -38,11 +38,15 @@ async def delete_object(object_path, client):
 
 async def list_objects(prefix, client):
     try:
-        response = client.list_objects(
+        response = client.objects.list_objects(
             prefix=prefix
         )
+        items = []
         for item in response:
-            yield item
+            items.append(item)
+            print(f"Object: {item}")
+        return items
             
     except Exception as error:
         logging.error(f"Exception: {error}")
+        return []

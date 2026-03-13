@@ -48,7 +48,7 @@ Use this example app to upload and download binary data to, and from, Lattice:
 $ python app.py [-h] --operation OPERATION \
     [--file PATH_TO_FILE] \
     [--path PATH_TO_OBJECT_IN_LATTICE] \
-    [--entity ENTITIY_ID]
+    [--entity ENTITY_ID]
 ```
 
 ### Example
@@ -56,18 +56,18 @@ $ python app.py [-h] --operation OPERATION \
 1. To upload an object to Lattice and associate it with an entity, use the following:
 
     ```bash
-    $ python app.py --operation upload --file ./path/to/file --entity <entityId>
+    $ python app.py --operation upload --file <PATH_TO_FILE> --entity <ENTITY_ID>
     ```
 
 1. To download an existing object from Lattice, use the following:
 
     ```bash
-    $ python app.py --operation download --path path/to/object
+    $ python app.py --operation download --path <PATH_TO_OBJECT_IN_LATTICE>
     ```
 1. To delete an existing object from Lattice, use the following:
 
     ```bash
-    $ python app.py --operation delete --path path/to/object --entity <entityId>
+    $ python app.py --operation delete --path <PATH_TO_OBJECT_IN_LATTICE> --entity <ENTITY_ID>
     ```
 
 For more information, see the [Lattice SDK documentation](https://developer.anduril.com) website.
