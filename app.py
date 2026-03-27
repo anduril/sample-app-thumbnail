@@ -2,29 +2,20 @@ from anduril import Lattice
 
 from objects import upload_object, download_object, delete_object, list_objects
 from entities import override_entity
-import os, sys, asyncio, logging, argparse
+import os
+import sys
+import asyncio
+import logging
+import argparse
 
-lattice_endpoint = os.getenv('LATTICE_ENDPOINT')
-client_id = os.getenv('LATTICE_CLIENT_ID')
-client_secret = os.getenv('LATTICE_CLIENT_SECRET')
-# Remove sandboxes_token from the following statements if you are not developing on Sandboxes.
-sandboxes_token = os.getenv('SANDBOXES_TOKEN')
-if not client_id or not client_secret or not lattice_endpoint or not sandboxes_token:
-    logging.warning("Missing environment variables.")
-    sys.exit(1)
 
 def save_object(data, object_path):
     file_name = os.path.basename(object_path)
-    with open(file_name, 'wb') as file:
+    with open(file_name, "wb") as file:
         file.write(data)
 
-client = Lattice(
-    base_url=f"https://{lattice_endpoint}",
-    client_id=client_id,
-    client_secret=client_secret,
-    headers={ "Anduril-Sandbox-Authorization": f"Bearer {sandboxes_token}" }
-)
-async def main(args):
+
+async def main(args, client):
     try:
         operation = args.operation
         file_path = args.file
@@ -36,8 +27,10 @@ async def main(args):
             case "upload":
                 # Get the name of the file.
                 upload_response = await upload_object(file_path, client)
-                if (upload_response):
-                    object_path = f"/api/v1/objects/{upload_response.content_identifier.path}"
+                if upload_response:
+                    object_path = (
+                        f"/api/v1/objects/{upload_response.content_identifier.path}"
+                    )
                     logging.info(f"Object path: {object_path}")
                 else:
                     logging.error("Failed to upload object.")
@@ -64,21 +57,60 @@ async def main(args):
     except Exception as error:
         logging.error(f"Exception: {error}")
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Track Thumbnails Sample App")
 
-    parser.add_argument('--operation', type=str, required=True,
-                        help='The API service operation you want to execute. \
-                            Possible values: upload | download | list | delete')
-    parser.add_argument('--file', type=str, required=False,
-                        help='The file you want to upload.')
-    parser.add_argument('--path', type=str, required=False,
-                        help='The path of the file you want to donwload, or delete.')
-    parser.add_argument('--entity', type=str, required=False,
-                        help='The unique entity ID of the entity associated with the object. \
-                            This option applies to upload and delete operations.')
-    parser.add_argument('--prefix', type=str, required=False,
-                        help='The prefix of the relative path used to list objects.')
+    parser.add_argument(
+        "--operation",
+        type=str,
+        required=True,
+        help="The API service operation you want to execute. \
+                            Possible values: upload | download | list | delete",
+    )
+    parser.add_argument(
+        "--file", type=str, required=False, help="The file you want to upload."
+    )
+    parser.add_argument(
+        "--path",
+        type=str,
+        required=False,
+        help="The path of the file you want to donwload, or delete.",
+    )
+    parser.add_argument(
+        "--entity",
+        type=str,
+        required=False,
+        help="The unique entity ID of the entity associated with the object. \
+                            This option applies to upload and delete operations.",
+    )
+    parser.add_argument(
+        "--prefix",
+        type=str,
+        required=False,
+        help="The prefix of the relative path used to list objects.",
+    )
     args = parser.parse_args()
 
-    asyncio.run(main(args))
+    lattice_endpoint = os.getenv("LATTICE_ENDPOINT")
+    client_id = os.getenv("LATTICE_CLIENT_ID")
+    client_secret = os.getenv("LATTICE_CLIENT_SECRET")
+    # Remove sandboxes_token from the following statements if you are not developing on Sandboxes.
+    sandboxes_token = os.getenv("SANDBOXES_TOKEN")
+    if (
+        not client_id
+        or not client_secret
+        or not lattice_endpoint
+        or not sandboxes_token
+    ):
+        logging.warning("Missing environment variables.")
+        sys.exit(1)
+
+    client = Lattice(
+        base_url=f"https://{lattice_endpoint}",
+        client_id=client_id,
+        client_secret=client_secret,
+        headers={"Anduril-Sandbox-Authorization": f"Bearer {sandboxes_token}"},
+    )
+
+    asyncio.run(main(args, client))

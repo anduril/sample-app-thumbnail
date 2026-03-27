@@ -9,7 +9,9 @@ DATA_TYPE = os.getenv("DATA_TYPE", "test_data")
 logger = logging.getLogger(__name__)
 
 
-async def override_entity(operation: str, object_path: str, entity_id: str, client) -> None:
+async def override_entity(
+    operation: str, object_path: str, entity_id: str, client
+) -> None:
     """Override an entity's media component to link or unlink a thumbnail.
 
     Args:
@@ -33,7 +35,9 @@ async def override_entity(operation: str, object_path: str, entity_id: str, clie
     elif operation == "delete":
         media = Media(media=[])
     else:
-        raise ValueError(f"Unsupported operation: {operation!r} (expected 'upload' or 'delete')")
+        raise ValueError(
+            f"Unsupported operation: {operation!r} (expected 'upload' or 'delete')"
+        )
 
     provenance = Provenance(
         integration_name=INTEGRATION_NAME,
