@@ -1,5 +1,13 @@
+import asyncio
 import logging
 import os
+
+logger = logging.getLogger(__name__)
+
+
+def open_file_sync(client, object_path, file_path):
+    with open(f"{file_path}", "rb") as file:
+        return client.objects.upload_object(object_path=object_path, request=file)
 
 
 async def upload_object(file_path, client):
@@ -9,14 +17,9 @@ async def upload_object(file_path, client):
         # Define a unique path for the object using the file name.
         object_path = f"{file_name}"
         # Open the file in binary mode.
-        with open(f"{file_path}", "rb") as file:
-            print(file)
-            response = client.objects.upload_object(
-                object_path=object_path, request=file
-            )
-        return response
-    except Exception as error:
-        logging.error(f"Exception: {error}")
+        return await asyncio.to_thread(open_file_sync, client, object_path, file_path)
+    except Exception:
+        logger.exception("An unexpected error occurred.")
 
 
 async def download_object(object_path, client):
@@ -24,16 +27,16 @@ async def download_object(object_path, client):
         response = client.objects.get_object(object_path=object_path)
         chunks = [chunk for chunk in response]
         return b"".join(chunks)
-    except Exception as error:
-        logging.error(f"Exception: {error}")
+    except Exception:
+        logger.exception("An unexpected error occurred.")
 
 
 async def delete_object(object_path, client):
     try:
         response = client.objects.delete_object(object_path=object_path)
         return response
-    except Exception as error:
-        logging.error(f"Exception: {error}")
+    except Exception:
+        logger.exception("An unexpected error occurred.")
 
 
 async def list_objects(prefix, client):
@@ -42,5 +45,5 @@ async def list_objects(prefix, client):
         for item in response:
             yield item
 
-    except Exception as error:
-        logging.error(f"Exception: {error}")
+    except Exception:
+        logger.exception("An unexpected error occurred.")

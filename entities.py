@@ -1,7 +1,8 @@
-from anduril import Media, MediaItem, Entity, Provenance
-from datetime import datetime, timezone
 import logging
 import os
+from datetime import datetime, timezone
+
+from anduril import Entity, Media, MediaItem, Provenance
 
 INTEGRATION_NAME = os.getenv("INTEGRATION_NAME", "sample-app-thumbnail")
 DATA_TYPE = os.getenv("DATA_TYPE", "test_data")
@@ -46,7 +47,7 @@ async def override_entity(
     )
 
     try:
-        await client.entities.override_entity(
+        client.entities.override_entity(
             entity_id=entity_id,
             field_path="media.media",
             entity=Entity(
