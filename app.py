@@ -1,12 +1,15 @@
-from anduril import Lattice
-
-from objects import upload_object, download_object, delete_object, list_objects
-from entities import override_entity
-import os
-import sys
+import argparse
 import asyncio
 import logging
-import argparse
+import os
+import sys
+
+from anduril import Lattice
+
+from entities import override_entity
+from objects import delete_object, download_object, list_objects, upload_object
+
+logger = logging.getLogger(__name__)
 
 
 def save_object(data, object_path):
@@ -31,9 +34,9 @@ async def main(args, client):
                     object_path = (
                         f"/api/v1/objects/{upload_response.content_identifier.path}"
                     )
-                    logging.info(f"Object path: {object_path}")
+                    logger.info(f"Object path: {object_path}")
                 else:
-                    logging.error("Failed to upload object.")
+                    logger.error("Failed to upload object.")
                     sys.exit(1)
 
                 await override_entity(operation, object_path, entity_id, client)
@@ -50,12 +53,12 @@ async def main(args, client):
                 await override_entity(operation, object_path, entity_id, client)
 
             case _:
-                logging.error("Operation not supported")
+                logger.error("Operation not supported")
 
-    except asyncio.CancelledError or KeyboardInterrupt:
-        logging.error(">>>Exiting...")
-    except Exception as error:
-        logging.error(f"Exception: {error}")
+    except (asyncio.CancelledError, KeyboardInterrupt):
+        logger.error(">>>Exiting...")
+    except Exception:
+        logger.exception("An unexpected error occurred.")
 
 
 if __name__ == "__main__":
@@ -103,7 +106,7 @@ if __name__ == "__main__":
         or not lattice_endpoint
         or not sandboxes_token
     ):
-        logging.warning("Missing environment variables.")
+        logger.warning("Missing environment variables.")
         sys.exit(1)
 
     client = Lattice(

@@ -33,7 +33,8 @@ For more information about the Objects API, see the following:
 
     ```bash 
     $ export LATTICE_ENDPOINT=lattice-your_env_id.env.sandboxes.developer.anduril.com
-    $ export ENVIRONMENT_TOKEN=YOUR_LATTICE_ENVIRONMENT_TOKEN
+    $ export LATTICE_CLIENT_ID=YOUR_LATTICE_CLIENT_ID
+    $ export LATTICE_CLIENT_SECRET=YOUR_LATTICE_CLIENT_SECRET
     $ export SANDBOXES_TOKEN=YOUR_LATTICE_SANDBOXES_TOKEN
     ```
 
