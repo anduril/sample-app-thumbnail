@@ -1,1 +1,1 @@
-anduril-lattice-sdk==5.0.0
+anduril-lattice-sdk==5.1.0
