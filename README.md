@@ -14,6 +14,7 @@ For more information about the Objects API, see the following:
 
 ## Before you begin
 
+1. Install Python version greater than or equal to 3.11.
 1. Clone the repository.
 1. Install the dependencies:
 
