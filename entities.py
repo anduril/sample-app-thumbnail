@@ -1,6 +1,6 @@
 import logging
 import os
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from anduril import Entity, Media, MediaItem, Provenance
 
@@ -43,7 +43,7 @@ async def override_entity(
     provenance = Provenance(
         integration_name=INTEGRATION_NAME,
         data_type=DATA_TYPE,
-        source_update_time=datetime.now(timezone.utc),
+        source_update_time=datetime.now(UTC),
     )
 
     try:
