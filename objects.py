@@ -41,9 +41,9 @@ async def delete_object(object_path, client):
 
 async def list_objects(prefix, client):
     try:
-        response = client.list_objects(prefix=prefix)
+        response = client.objects.list_objects(prefix=prefix)
         for item in response:
-            yield item
+            logger.info(f"Object path: {item.content_identifier.path}")
 
     except Exception:
         logger.exception("An unexpected error occurred.")
