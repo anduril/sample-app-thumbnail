@@ -43,7 +43,8 @@ async def main(args, client):
 
             case "download":
                 result = await download_object(object_path, client)
-                save_object(result, file_path)
+                if result is not None:
+                    save_object(result, file_path or object_path)
 
             case "list":
                 await list_objects(prefix, client)
@@ -62,6 +63,8 @@ async def main(args, client):
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
+
     parser = argparse.ArgumentParser(description="Track Thumbnails Sample App")
 
     parser.add_argument(
@@ -96,13 +99,13 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     lattice_endpoint = os.getenv("LATTICE_ENDPOINT")
+    environment_token = os.getenv("ENVIRONMENT_TOKEN")
     client_id = os.getenv("LATTICE_CLIENT_ID")
     client_secret = os.getenv("LATTICE_CLIENT_SECRET")
     # Remove sandboxes_token from the following statements if you are not developing on Sandboxes.
     sandboxes_token = os.getenv("SANDBOXES_TOKEN")
     if (
-        not client_id
-        or not client_secret
+        not (environment_token or (client_id and client_secret))
         or not lattice_endpoint
         or not sandboxes_token
     ):
@@ -111,6 +114,7 @@ if __name__ == "__main__":
 
     client = Lattice(
         base_url=f"https://{lattice_endpoint}",
+        token=environment_token or None,
         client_id=client_id,
         client_secret=client_secret,
         headers={"Anduril-Sandbox-Authorization": f"Bearer {sandboxes_token}"},

@@ -21,7 +21,7 @@ For more information about the Objects API, see the following:
     $ pip install -r requirements.txt
     ```
 
-1. Get the following authorization tokens from the [Lattice Sandboxes dashboard](https://sandboxes.developer.anduril.com). For information on how to obtain these tokens, see the [Sandboxes documentation](https://developer.anduril.com/guides/getting-started/sandboxes#get-the-tokens):
+1. Get the following authorization tokens from the [Lattice Sandboxes dashboard](https://sandboxes.developer.anduril.com). For information on how to obtain these tokens, see the [Sandboxes documentation](https://developer.anduril.com/guides/developer-tools/sandboxes#set-up-credentials):
     - ```authorization``` -- This is your **environment bearer token**, which you can get by choosing your environment
         from the [dashboard list](https://sandboxes.developer.anduril.com/idee/environments).
     - ```anduril-sandbox-authorization``` -- This is your **sandboxes bearer token**, which you can obtain from the
@@ -29,10 +29,11 @@ For more information about the Objects API, see the following:
 
 1. Get your environment URL from the environment details page in Sandboxes.
 
-1. Set your system environment variables:
+1. Set your system environment variables. Set either `ENVIRONMENT_TOKEN`, or `LATTICE_CLIENT_ID` and `LATTICE_CLIENT_SECRET`:
 
     ```bash 
     $ export LATTICE_ENDPOINT=lattice-your_env_id.env.sandboxes.developer.anduril.com
+    $ export ENVIRONMENT_TOKEN=YOUR_LATTICE_ENVIRONMENT_TOKEN
     $ export LATTICE_CLIENT_ID=YOUR_LATTICE_CLIENT_ID
     $ export LATTICE_CLIENT_SECRET=YOUR_LATTICE_CLIENT_SECRET
     $ export SANDBOXES_TOKEN=YOUR_LATTICE_SANDBOXES_TOKEN
