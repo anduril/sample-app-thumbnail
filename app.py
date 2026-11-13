@@ -39,7 +39,8 @@ async def main(args, client):
                     logger.error("Failed to upload object.")
                     sys.exit(1)
 
-                await override_entity(operation, object_path, entity_id, client)
+                if entity_id:
+                    await override_entity(operation, object_path, entity_id, client)
 
             case "download":
                 result = await download_object(object_path, client)
@@ -51,7 +52,12 @@ async def main(args, client):
 
             case "delete":
                 result = await delete_object(object_path, client)
-                await override_entity(operation, object_path, entity_id, client)
+                if not result:
+                    logger.error("Failed to delete object.")
+                    sys.exit(1)
+
+                if entity_id:
+                    await override_entity(operation, object_path, entity_id, client)
 
             case _:
                 logger.error("Operation not supported")
