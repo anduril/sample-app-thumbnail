@@ -33,8 +33,8 @@ async def download_object(object_path, client):
 
 async def delete_object(object_path, client):
     try:
-        response = client.objects.delete_object(object_path=object_path)
-        return response
+        client.objects.delete_object(object_path=object_path)
+        return True
     except Exception:
         logger.exception("An unexpected error occurred.")
 
